@@ -20,7 +20,7 @@ if (!term) {
     term = "Mr. Nobody";
 }
 
-// Print whether searching for a show or actor, print the term as well
+// Print whether searching for a concert, song, or movie and print the term as well
 if (search === "concert-this") {
     console.log("Searching for concert");
     bandsInTown(term);
@@ -33,7 +33,7 @@ if (search === "concert-this") {
 }
 
 
-
+//Bands in Town
 var bandsInTown = function () {
     //findConcert takes in name of band and searches the bands in town API
     this.findConcert = function () {
@@ -83,11 +83,9 @@ var OMDB = function () {
     }
 }
 
-
+//SPOTIFY
 var spotify = new Spotify(keys.spotify);
 
-// SPOTIFY incorporate the "axios" npm package
-var axios = require("axios");
 var song =
     // We then run the request with axios module on a URL with a JSON
     axios.get("spotify" + song).then(
