@@ -2,8 +2,10 @@
 var axios = require("axios");
 
 require("dotenv").config();
-
 var keys = require("./keys.js");
+//SPOTIFY
+var Spotify = require('node-spotify-api');
+
 
 // Grab search command line argument
 var search = process.argv[2];
@@ -83,21 +85,27 @@ function OMDB() {
     });
 }
 
-//SPOTIFY
-function song(){
-    var URL = "";
-    //run the request with axios module on a URL with JSON
-    axios.get(URL).then(function(response){
-        //place response.data into a variable jsonData
-        var jsonData = response.data;
 
-        //songData = the string containing the song data we will print to console
-        var songData = [
-            "Artist: " + jsonData,
-            "Song name: " + jsonData,
-            "Preview link: " + jsonData,
-            "Album: " + jsonData
-        ].join("\n\n");
+
+function song(){
+    //run the request with axios module on a URL with JSON
+    var getSpotify = new Spotify(keys.spotify);
+    getSpotify.search({ type: 'track', query: term }, function(err, response){
+        if (err) {
+            return console.log(err);
+        }
+
+
+        //place response.data into a variable jsonData
+        var jsonData = response.tracks.items[0];
+
+         //songData = the string containing the song data we will print to console
+         var songData = [
+             "Artist: " + jsonData.album.artists.name,
+             "Song name: " + jsonData.name,
+             "Preview link: " + jsonData.album.external_urls.spotify,
+             "Album: " + jsonData.album.name
+         ].join("\n\n");
 
         //print songData to console
         console.log(songData);
