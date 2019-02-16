@@ -35,24 +35,25 @@ if (search === "concert-this") {
 
 
 //Bands in Town
-var bandsInTown = function () {
+function bandsInTown() {
     //findConcert takes in name of band and searches the bands in town API
-    this.findConcert = function () {
-        var URL = "https://rest.bandsintown.com/artists/" + term + "/events?app_id=codingbootcamp";
-        // We then run the request with axios module on a URL with a JSON
-        axios.get(URL).then(function (response) {
-            // place response.data into a variable jsonData
-            var jsonData = response.data;
+    var URL = "https://rest.bandsintown.com/artists/" + term + "/events?app_id=codingbootcamp";
+    // We then run the request with axios module on a URL with a JSON
+    axios.get(URL).then(function (response) {
+        // place response.data into a variable jsonData
+        var jsonData = response.data;
 
-            //concertData = the string containing the concert data we will print to console
-            var concertData = [
-                "The venue is: " + jsonData.venue.name,
-                "The venue location is: " + jsonData.venue.city,
-                "The date of event is: " + jsonData.datetime
-            ].join("\n\n");
-        }
-        );
+        //concertData = the string containing the concert data we will print to console
+        var concertData = [
+            "The venue is: " + jsonData[0].venue.name,
+            "The venue location is: " + jsonData[0].venue.city,
+            "The date of event is: " + jsonData[0].datetime
+        ].join("\n\n");
+
+        //print concertData to console
+        console.log(concertData);
     }
+    );
 }
 
 // OMDB 
@@ -60,28 +61,28 @@ function OMDB() {
     console.log(term);
 
     //findMovie takes in name of movie and searches the OMDB API
-        var URL = "http://www.omdbapi.com/?t=" + term + "&y=&plot=short&apikey=trilogy";
-        //run the request with axios module on a URL with a JSON
-        axios.get(URL).then(function (response) {
-            //place response.data into a variable jsonData
-            var jsonData = response.data;
+    var URL = "http://www.omdbapi.com/?t=" + term + "&y=&plot=short&apikey=trilogy";
+    //run the request with axios module on a URL with a JSON
+    axios.get(URL).then(function (response) {
+        //place response.data into a variable jsonData
+        var jsonData = response.data;
 
-            //movieData = the string containing the movie data we will print to console
-            var movieData = [
-                "Title:" + jsonData.Title,
-                "Year of release:" + jsonData.Year,
-                "IMDB rating: " + jsonData.imdbRating,
-                "Rotten Tomatoes rating: " + jsonData.Ratings[1].Source,
-                "Country where produced: " + jsonData.Country,
-                "Language: " + jsonData.Language,
-                "Plot: " + jsonData.Plot,
-                "Cast: " + jsonData.Actors
-            ].join("\n\n");
+        //movieData = the string containing the movie data we will print to console
+        var movieData = [
+            "Title:" + jsonData.Title,
+            "Year of release:" + jsonData.Year,
+            "IMDB rating: " + jsonData.imdbRating,
+            "Rotten Tomatoes rating: " + jsonData.Ratings[1].Source,
+            "Country where produced: " + jsonData.Country,
+            "Language: " + jsonData.Language,
+            "Plot: " + jsonData.Plot,
+            "Cast: " + jsonData.Actors
+        ].join("\n\n");
 
-            //print movieData to console
-            console.log(movieData)
-        }
-        );
+        //print movieData to console
+        console.log(movieData)
+    }
+    );
 }
 
 //SPOTIFY
