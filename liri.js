@@ -7,7 +7,7 @@ var keys = require("./keys.js");
 
 // Grab search command line argument
 var search = process.argv[2];
-// Joining the remaining arguments since an actor or tv show name may contain spaces
+// Joining the remaining arguments since input may contain spaces
 var term = process.argv.slice(3).join(" ");
 
 // By default, if no search type is provided, search for Mr. Nobody
@@ -26,10 +26,11 @@ if (search === "concert-this") {
     bandsInTown(term);
 } else if (search === "spotify-this-song") {
     console.log("Searching for song");
-    tv.findShow(term);
+    song(term);
 } else if (search === "movie-this") {
     console.log("Searching for movie");
-    OMDB(term);
+    console.log(term);
+    OMDB();
 }
 
 
@@ -55,9 +56,10 @@ var bandsInTown = function () {
 }
 
 // OMDB 
-var OMDB = function () {
+function OMDB() {
+    console.log(term);
+
     //findMovie takes in name of movie and searches the OMDB API
-    this.findMovie = function () {
         var URL = "http://www.omdbapi.com/?t=" + term + "&y=&plot=short&apikey=trilogy";
         //run the request with axios module on a URL with a JSON
         axios.get(URL).then(function (response) {
@@ -80,23 +82,22 @@ var OMDB = function () {
             console.log(movieData)
         }
         );
-    }
 }
 
 //SPOTIFY
-var spotify = new Spotify(keys.spotify);
+//var spotify = new Spotify(keys.spotify);
 
-var song =
+//var song =
     // We then run the request with axios module on a URL with a JSON
-    axios.get("spotify" + song).then(
-        function (response) {
+//    axios.get("spotify" + song).then(
+//        function (response) {
             // Then we print out the imdbRating
-            console.log("Artist: " + response.data.imdbRating);
-            console.log("Song name: " + response.data.imdbRating);
-            console.log("Preview link: " + response.data.imdbRating);
-            console.log("Album: " + response.data.imdbRating);
+//            console.log("Artist: " + response.data.imdbRating);
+//            console.log("Song name: " + response.data.imdbRating);
+//            console.log("Preview link: " + response.data.imdbRating);
+//            console.log("Album: " + response.data.imdbRating);
             //if no song provided program will play "The Sign" by Ace of Base
-        }
-    );
+//        }
+//    );
 
 
