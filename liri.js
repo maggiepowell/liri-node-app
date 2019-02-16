@@ -60,7 +60,6 @@ function bandsInTown() {
 function OMDB() {
     console.log(term);
 
-    //findMovie takes in name of movie and searches the OMDB API
     var URL = "http://www.omdbapi.com/?t=" + term + "&y=&plot=short&apikey=trilogy";
     //run the request with axios module on a URL with a JSON
     axios.get(URL).then(function (response) {
@@ -80,25 +79,28 @@ function OMDB() {
         ].join("\n\n");
 
         //print movieData to console
-        console.log(movieData)
-    }
-    );
+        console.log(movieData);
+    });
 }
 
 //SPOTIFY
-//var spotify = new Spotify(keys.spotify);
+function song(){
+    var URL = "";
+    //run the request with axios module on a URL with JSON
+    axios.get(URL).then(function(response){
+        //place response.data into a variable jsonData
+        var jsonData = response.data;
 
-//var song =
-    // We then run the request with axios module on a URL with a JSON
-//    axios.get("spotify" + song).then(
-//        function (response) {
-            // Then we print out the imdbRating
-//            console.log("Artist: " + response.data.imdbRating);
-//            console.log("Song name: " + response.data.imdbRating);
-//            console.log("Preview link: " + response.data.imdbRating);
-//            console.log("Album: " + response.data.imdbRating);
-            //if no song provided program will play "The Sign" by Ace of Base
-//        }
-//    );
+        //songData = the string containing the song data we will print to console
+        var songData = [
+            "Artist: " + jsonData,
+            "Song name: " + jsonData,
+            "Preview link: " + jsonData,
+            "Album: " + jsonData
+        ].join("\n\n");
 
-
+        //print songData to console
+        console.log(songData);
+    });
+}
+//if no song provided program will play "The Sign" by Ace of Base
