@@ -1,5 +1,6 @@
 //add axios npm package
 var axios = require("axios");
+var fs = require("fs");
 
 require("dotenv").config();
 var keys = require("./keys.js");
@@ -33,6 +34,9 @@ if (search === "concert-this") {
     console.log("Searching for movie");
     console.log(term);
     OMDB();
+} else if (search === "do-what-it-says") {
+    console.log("Searching for song");
+    randomize();
 }
 
 
@@ -112,3 +116,17 @@ function song(){
     });
 }
 //if no song provided program will play "The Sign" by Ace of Base
+
+function randomize(){
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        if (error) {
+          return console.log(error);
+        }
+             console.log(data);
+        var dataArr = data.split(",");
+        console.log(dataArr);
+        if(dataArr==="concert-this"){
+            song();
+        }
+      });
+}
